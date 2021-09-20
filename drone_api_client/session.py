@@ -2,12 +2,12 @@ import requests
 
 
 class Session:
-    def __init__(self):
+    def __init__(self, host: str, token: str):
         self.__repo = 'elsevier-health/3d4medical-autotests'
-        self.__host = 'https://drone-github.nonprod.3d4medical.com/api'
+        self.__host = host
         self._session = requests.Session()
         self._session.headers.update({
-            'Authorization': 'Bearer cWYcXw2xNmSDIN6fioarQ9ve24xJ6LLG'
+            'Authorization': f'Bearer {token}'
         })
 
     def get(self, url: str, add_repo: bool = True):
