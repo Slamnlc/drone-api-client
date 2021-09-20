@@ -37,8 +37,7 @@ class DroneSecret:
 
     def update_secret(self, new_cron: dict):
         self.name = new_cron.get('name')
-        self.expr = new_cron.get('expr')
-        self.branch = new_cron.get('branch')
+        self.data = new_cron.get('data')
 
     def to_dict(self):
         return {key: self.__getattribute__(key) for key in DroneSecret.__attr__}
