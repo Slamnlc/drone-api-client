@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='drone-api-client',
-    version='0.1',
+    version='0.2',
     use_scm_version=False,
     description='Drone Api Python Client',
     author='Biriukov Maksym',
