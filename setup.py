@@ -13,4 +13,9 @@ setup(
     install_requires=[
         'requests'
     ],
+    entry_points={
+        "drone-api": [
+            "drone-api-client = drone_api_client.drone_api_client",
+        ]
+    },
 )
