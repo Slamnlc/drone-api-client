@@ -14,7 +14,7 @@ setup(
         'requests'
     ],
     entry_points={
-        "drone-api": [
+        "drone_api": [
             "drone-api-client = drone_api_client.drone_api_client",
         ]
     },
