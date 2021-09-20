@@ -8,5 +8,9 @@ setup(
     description='Drone Api Python Client',
     author='Biriukov Maksym',
     author_email='maximbirukov77@gmail.com',
-    
+    url="https://github.com/Slamnlc/drone-api-client",
+    download_url='https://github.com/Slamnlc/drone-api-client/archive/refs/tags/v0.1.tar.gz',
+    install_requires=[
+        'requests'
+    ],
 )
