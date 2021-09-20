@@ -1,11 +1,16 @@
 import setuptools
 from setuptools import setup
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='drone-api-client',
     version='0.2',
     use_scm_version=False,
     description='Drone Api Python Client',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author='Biriukov Maksym',
     author_email='maximbirukov77@gmail.com',
     url="https://github.com/Slamnlc/drone-api-client",
