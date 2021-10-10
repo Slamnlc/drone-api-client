@@ -1,27 +1,22 @@
+import json
+
 import requests
 
 
 class Session:
-    def __init__(self, host: str, token: str, repo: str):
+    def __init__(self, host: str, token: str, repo: str = ''):
         self.repo = repo
-        self.__host = host
+        self.__host = f"{host.replace('/api', '')}/api"
         self._session = requests.Session()
         self._session.headers.update({
             'Authorization': f'Bearer {token}'
         })
 
-    def get(self, url: str, add_repo: bool = True):
+    def request(self, method: str, url: str, add_repo: bool = True, data: dict = None, params: dict = None, **kwargs):
         host = f"{self.__host}/repos/{self.repo}" if add_repo else self.__host
-        return self._session.get(f"{host}{url}").json()
-
-    def post(self, url: str, data: dict = None, add_repo: bool = True):
-        host = f"{self.__host}/repos/{self.repo}" if add_repo else self.__host
-        return self._session.post(f"{host}{url}", data=data).json()
-
-    def delete(self, url: str, add_repo: bool = True):
-        host = f"{self.__host}/repos/{self.repo}" if add_repo else self.__host
-        return self._session.delete(f"{host}{url}")
-
-    def patch(self, url: str, data: dict = None, add_repo: bool = True):
-        host = f"{self.__host}/repos/{self.repo}" if add_repo else self.__host
-        return self._session.patch(f"{host}{url}", data=data).json()
+        data = json.dumps(data) if data else ''
+        response = self._session.request(method=method, url=f'{host}{url}', data=data, params=params, **kwargs)
+        if response.status_code in (200, 201):
+            return response.json()
+        else:
+            return f'Error: {response.status_code}: {response.reason} ({response.text})'
