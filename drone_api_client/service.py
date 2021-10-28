@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 def get_dict_from_locals(locals_dict: dict, replace_underscore: bool = False, exclude: list = None):
-    exclude = tuple('self', ) if exclude is None else tuple(['self'] + exclude)
+    exclude = ('self', ) if exclude is None else tuple(['self'] + exclude)
     return {key if replace_underscore else key: value for key, value in
             locals_dict.items() if key not in exclude and '__py' not in key and value is not None}
 

@@ -29,12 +29,12 @@ drone = DroneApi('your_host', 'your_token', 'repository_name')
     - user
     - users
     - builds
+    - repos
 - Change repository name without initialization new class instance
 
 **TODO**
 
 - Add support:
-    - repos
     - templates
 
 **Usage examples**

@@ -52,7 +52,7 @@ class Cron(Base):
         :param cron_name: existing cron in repository
         :return: None
         """
-        return self._session.request('post', f'/cron/{cron_name}')
+        return self._session.request('delete', f'/cron/{cron_name}')
 
     def get_cron_info(self, cron_name: str) -> DroneCron:
         """
@@ -96,8 +96,9 @@ class Cron(Base):
         cron = self.get_cron_info(name)
         if isinstance(cron, (list, tuple)):
             return "Cron expression with given name doesn't found"
-        data = get_dict_from_locals(locals(), exclude=['name'])
-        return self._valid(self._session.request('patch', f'/cron/{cron.name}', data=data), DroneCron)
+        cron.expr = expr if expr else cron.expr
+        cron.branch = branch if branch else cron.branch
+        return self._valid(self._session.request('patch', f'/cron/{name}', data=cron.to_dict()), DroneCron)
 
 
 class Secrets(Base):
